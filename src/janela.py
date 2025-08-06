@@ -15,7 +15,15 @@ y = altura / 2
 x_blue = randint(30,500)
 y_blue = randint(40,360)
 
+# Fonte da mensagem que aparecerá na tela
+fonte = pygame.font.SysFont('Times New Roman', 40, True, True)
+
+# Variável Pontos
+pontos = 0
+
+# Tela
 tela = pygame.display.set_mode((largura,altura)) #objeto tela, set mode vai recebe uma tupla
+
 # Nome
 pygame.display.set_caption('lab-pygame')
 
@@ -27,6 +35,9 @@ relogio = pygame.time.Clock()
 while True:
     relogio.tick(40)#quantos frames por segundo o nosso jogo terá
     tela.fill((0,0,0))
+    mensagem = f'Pontos: {pontos}'
+    texto_formatado = fonte.render(mensagem, False, (255,255,255))
+
     for event in pygame.event.get(): #a cada interação do loop principal,checar se algum evento ocorreu
         if event.type == QUIT:
             pygame.quit()
@@ -57,9 +68,10 @@ while True:
     
     #4. Colisão de objetos
     if retangulo_green.colliderect(retangulo_blue):
+        pontos += 1
         x_blue = randint(30,500)
         y_blue = randint(40,360)
-        
+
     #Se mova sozinho
     # if y >= altura:
     #    y = 0
@@ -68,4 +80,5 @@ while True:
     #pygame.draw.circle(tela,(255,0,0),(300,260), 40)
     #pygame.draw.line(tela, (120,50,50), (380,0), (380,600), 5)
 
+    tela.blit(texto_formatado, (450,40)) # aparecer na tela
     pygame.display.update() #atualiza a tela do jogo
