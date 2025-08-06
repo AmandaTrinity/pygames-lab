@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
 from sys import exit
+from random import randint #Sorteia valores dentro de um determinado intervalo
 
 pygame.init() #incializar todas as funcoes de pygame
 
@@ -9,6 +10,10 @@ largura = 640
 altura = 480
 x = largura / 2 
 y = altura / 2 
+
+# Variável para retângulo blue
+x_blue = randint(30,500)
+y_blue = randint(40,360)
 
 tela = pygame.display.set_mode((largura,altura)) #objeto tela, set mode vai recebe uma tupla
 # Nome
@@ -48,11 +53,13 @@ while True:
     
     # 3. Desenhando o nosso retângulo
     retangulo_green = pygame.draw.rect(tela,(0,255,0), (x, y,40,50)) #x,y,largura(px), altura
-    retangulo_blue = pygame.draw.rect(tela, (0,0,255), (150,250,40,50))
+    retangulo_blue = pygame.draw.rect(tela, (0,0,255), (x_blue,y_blue,40,50))
     
     #4. Colisão de objetos
     if retangulo_green.colliderect(retangulo_blue):
-        print('colidiu')
+        x_blue = randint(30,500)
+        y_blue = randint(40,360)
+        
     #Se mova sozinho
     # if y >= altura:
     #    y = 0
