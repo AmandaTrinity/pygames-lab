@@ -7,9 +7,8 @@ pygame.init() #incializar todas as funcoes de pygame
 #1. Definição da largura e altura da nossa tela
 largura = 640
 altura = 480
-x = 0
-#meio = largura_tela dividido por 2 - largura_objeto dividido por 2
-y = 0
+x = largura / 2 
+y = altura / 2 
 
 tela = pygame.display.set_mode((largura,altura)) #objeto tela, set mode vai recebe uma tupla
 # Nome
@@ -46,8 +45,14 @@ while True:
         y = y - 20
     if pygame.key.get_pressed()[K_s]:
         y = y + 20
-    pygame.draw.rect(tela,(0,255,0), (x, y,40,50 )) #x,y,largura(px), altura
     
+    # 3. Desenhando o nosso retângulo
+    retangulo_green = pygame.draw.rect(tela,(0,255,0), (x, y,40,50)) #x,y,largura(px), altura
+    retangulo_blue = pygame.draw.rect(tela, (0,0,255), (150,250,40,50))
+    
+    #4. Colisão de objetos
+    if retangulo_green.colliderect(retangulo_blue):
+        print('colidiu')
     #Se mova sozinho
     # if y >= altura:
     #    y = 0
