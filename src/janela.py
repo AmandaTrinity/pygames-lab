@@ -8,12 +8,19 @@ pygame.init() #incializar todas as funcoes de pygame
 #1. Definição da largura e altura da nossa tela
 largura = 640
 altura = 480
-x = largura / 2 
-y = altura / 2 
+x = int(largura / 2)
+y = int(altura / 2)
 
 # Variável para retângulo blue
 x_blue = randint(30,500)
 y_blue = randint(40,360)
+
+# Música
+pygame.mixer.music.set_volume(0.1)
+musica_fundo = pygame.mixer.music.load('sounds/msc_fundo.mp3')
+pygame.mixer.music.play(-1)
+
+barulho_colisao = pygame.mixer.Sound('sounds/colisao.wav')
 
 # Fonte da mensagem que aparecerá na tela
 fonte = pygame.font.SysFont('Times New Roman', 40, True, True)
@@ -71,6 +78,7 @@ while True:
         pontos += 1
         x_blue = randint(30,500)
         y_blue = randint(40,360)
+        barulho_colisao.play()
 
     #Se mova sozinho
     # if y >= altura:
